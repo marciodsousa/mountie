@@ -16,20 +16,67 @@
 * with Mountie If not, see http://www.gnu.org/licenses/.
 */
 
-int main (string[] args) {
-  Gtk.init(ref args);
+namespace mountie {
+	public class mountieApp : Granite.Application {
+		public MainWindow window;
 
-  var window = new Gtk.Window();
-  window.title = "Mountie";
-  window.set_border_width(0);
-  window.set_position(Gtk.WindowPosition.CENTER);
-  window.set_default_size(300, 300);
-  window.destroy.connect(Gtk.main_quit);
+		construct {
+			// App-Properties
+			program_name = "Mountie";
+			exec_name = "mountie";
 
-  var label = new Gtk.Label("Drag your image file here!");
+			build_data_dir = Constants.DATADIR;
+			build_pkg_data_dir = Constants.PKGDATADIR;
+			build_release_name = Constants.RELEASE_NAME;
+			build_version = Constants.VERSION;
+			build_version_info = Constants.VERSION_INFO;
 
-  window.add(label);
-  window.show_all();
-  Gtk.main ();
-  return 0;
+			app_years = "2015";
+			app_icon = "ubiquity";
+			app_launcher = "mountie.desktop";
+			application_id = "net.launchpad.mountie";
+			main_url = "https://github.com/marciodsousa/mountie";
+			bug_url = "https://github.com/marciodsousa/mountiee";
+			help_url = "https://github.com/marciodsousa/mountie";
+			translate_url = "https://github.com/marciodsousa/mountie";
+			about_authors = {"Márcio de Sousa <marciodesousa16@gmail.com>"};
+			about_documenters = {"Márcio de Sousa <marciodesousa16@gmail.com>"};
+			about_artists = {"Vera Sans <veraifos@gmail.com>"};
+			about_comments = _("A tool to mount your drive images easily.");
+			about_translators = "Launchpad Translators";
+		}
+
+		public mountieApp () {
+			// Translations
+			Intl.setlocale (LocaleCategory.ALL, "");
+			string langpack_dir = Path.build_filename (Constants.INSTALL_PREFIX, "share", "locale");
+			Intl.bindtextdomain (Constants.GETTEXT_PACKAGE, langpack_dir);
+			Intl.bind_textdomain_codeset (Constants.GETTEXT_PACKAGE, "UTF-8");
+			Intl.textdomain (Constants.GETTEXT_PACKAGE);
+
+			// Debug service
+			Granite.Services.Logger.initialize ("mountie");
+			Granite.Services.Logger.DisplayLevel = Granite.Services.LogLevel.DEBUG;
+		}
+
+		public override void activate () {
+			if (get_windows () == null) {
+				window = new MainWindow (this);
+				window.show_all ();
+			} else {
+				window.present ();
+			}
+		}
+
+		public override void open (File[] files, string hint) {
+			// Do nothing
+		}
+
+		public static void main (string[] args) {
+			Gtk.init (ref args);
+
+			var app = new mountie.mountieApp ();
+			app.run (args);
+		}
+	}
 }

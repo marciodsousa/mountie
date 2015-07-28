@@ -7,4 +7,3 @@ For all the Vala related modules see README.Vala.rst:
     - ValaPrecompile.cmake
     - ValaVersion.cmake
     - FindVala.cmake
-

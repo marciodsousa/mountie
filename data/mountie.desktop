@@ -1,11 +1,15 @@
 [Desktop Entry]
+Type=Application
 Name=Mountie
-GenericName=Mountie
-Comment=Mount your drive images easily
-Categories=GTK;Utility;
-Exec=mountie
+Comment=Mount your drive images easily.
+GenericName=mountie
+Exec=mountie %U
 Icon=ubiquity
 Terminal=false
-Type=Application
+Categories=GTK;Utility;
 X-GNOME-Gettext-Domain=mountie
-X-GNOME-Keywords=Mountie;
+Actions=AboutDialog;
+
+[Desktop Action AboutDialog]
+Exec=mountie --about
+Name=About Mountie

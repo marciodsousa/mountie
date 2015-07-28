@@ -1,55 +1,82 @@
-# project name
 project (mountie)
+cmake_minimum_required (VERSION 2.8)
+cmake_policy (VERSION 2.6)
 
-# the oldest stable cmake version we support
-cmake_minimum_required (VERSION 2.6)
+set (DATADIR "${CMAKE_INSTALL_PREFIX}/share/mountie")
+set (PKGDATADIR "${DATADIR}/mountie")
+set (GETTEXT_PACKAGE "mountie")
+set (RELEASE_NAME "mountie")
+set (VERSION "0.1")
+set (VERSION_INFO "Release")
+set (PREFIX ${CMAKE_INSTALL_PREFIX})
+set (DOLLAR "$")
 
-# tell cmake where its modules can be found in our project directory
 list (APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 
-# where we install data directory (if we have any)
-set (DATADIR "${CMAKE_INSTALL_PREFIX}/share")
+file(GLOB_RECURSE sources src/*.vala)
 
-# what to call that directory where we install data too
-set (PKGDATADIR "${DATADIR}/mountie")
+configure_file (${CMAKE_SOURCE_DIR}/src/config.vala.cmake ${CMAKE_SOURCE_DIR}/src/config.vala)
 
-set (EXEC_NAME "mountie")
-set (RELEASE_NAME "Mount your drive images easily.")
-set (VERSION "0.1")
-set (VERSION_INFO "intial version")
+find_package (Vala REQUIRED)
+include (ValaVersion)
+ensure_vala_version ("0.18" MINIMUM)
+include (ValaPrecompile)
 
-# we're about to use pkgconfig to make sure dependencies are installed so let's find pkgconfig first
+add_definitions (-DGETTEXT_PACKAGE="mountie")
+
 find_package(PkgConfig)
-
-# now let's actually check for the required dependencies
-pkg_check_modules(DEPS REQUIRED gtk+-3.0)
-
+pkg_check_modules(DEPS REQUIRED granite gtk+-3.0 gthread-2.0 gio-2.0)
 add_definitions(${DEPS_CFLAGS})
 link_libraries(${DEPS_LIBRARIES})
 link_directories(${DEPS_LIBRARY_DIRS})
 
-# make sure we have vala
 find_package(Vala REQUIRED)
-# make sure we use vala
 include(ValaVersion)
-# make sure it's the desired version of vala
-ensure_vala_version("0.16" MINIMUM)
+ensure_vala_version("0.16.0" MINIMUM)
 
-# files we want to compile
 include(ValaPrecompile)
-vala_precompile(VALA_C ${EXEC_NAME}
+vala_precompile(VALA_C
+    src/config.vala
     src/mountie.vala
-
-# tell what libraries to use when compiling
+    src/MainWindow.vala
+    src/Utils.vala
+    src/Widgets/TitleBar.vala
+    src/Widgets/EventsView.vala
+    src/Widgets/InfoScreen.vala
+    src/Widgets/SchemaList.vala
+    src/Widgets/Schema.vala
+    src/Widgets/SchemaFolder.vala
+    src/Widgets/KeyList.vala
+    src/Widgets/Key.vala
+    src/Widgets/KeyInfo.vala
+    src/Widgets/Fields/BoolInput.vala
+    src/Widgets/Fields/StringInput.vala
+    src/Widgets/Fields/SelectInput.vala
+    src/Widgets/Fields/IntegerInput.vala
+    src/Widgets/Fields/UIntegerInput.vala
+    src/Widgets/Fields/Int64Input.vala
+    src/Widgets/Fields/UInt64Input.vala
+    src/Widgets/Fields/DoubleInput.vala
+    src/Widgets/Fields/ArrayInput.vala
 PACKAGES
     gtk+-3.0
+    gio-2.0
+    granite
+OPTIONS
+    --thread
 )
 
-# tell cmake what to call the executable we just made
-add_executable(${EXEC_NAME} ${VALA_C})
+add_subdirectory (po)
 
-# install the binaries we just made
-install (TARGETS ${EXEC_NAME} RUNTIME DESTINATION bin)
+add_executable(mountie ${VALA_C})
 
-# install our .desktop file so the Applications menu will see it
-install (FILES ${CMAKE_CURRENT_SOURCE_DIR}/data/mountie.desktop DESTINATION ${DATADIR}/applications/)
+include(GSettings)
+add_schema("org.pantheon.mountie.gschema.xml")
+
+install (TARGETS mountie RUNTIME DESTINATION bin)
+
+install (FILES ${CMAKE_CURRENT_SOURCE_DIR}/data/mountie.desktop DESTINATION share/applications)
+
+install (FILES ${CMAKE_CURRENT_SOURCE_DIR}/data/128/mountie.svg DESTINATION share/icons/hicolor/128x128/apps)
+install (FILES ${CMAKE_CURRENT_SOURCE_DIR}/data/64/mountie.svg DESTINATION share/icons/hicolor/64x64/apps)
+install (FILES ${CMAKE_CURRENT_SOURCE_DIR}/data/48/mountie.svg DESTINATION share/icons/hicolor/48x48/apps)
