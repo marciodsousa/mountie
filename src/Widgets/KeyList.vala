@@ -28,14 +28,14 @@ namespace mountie.Widgets {
 			var keys = schema.list_keys ();
 
 			for (int i = 0; i < keys.length; i++) {
-				add_item (schema, keys[i]);
+				add_item ("schema");
 			}
 
 			this.show_all ();
 		}
 
-		public void add_item (Settings settings, string key, bool to_end = false, bool live = true, bool show_schema = false) {
-			var item = new Key (settings, key, settings.settings_schema.get_key (key), live, show_schema);
+		public void add_item (string key, bool to_end = false, bool live = true, bool show_schema = false) {
+			var item = new Key (key, live, show_schema);
 
 			if (to_end)
 				this.pack_end (item, false, false);

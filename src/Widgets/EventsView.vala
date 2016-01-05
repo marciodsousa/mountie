@@ -28,13 +28,13 @@ namespace mountie.Widgets {
 		public EventsView () {
 			stack = new Gtk.Stack ();
 
-			info_screen = new InfoScreen (_("Haven't mounted anything yet!"),
+			/*info_screen = new InfoScreen (_("Haven't mounted anything yet!"),
 					_("Here, you will see a list of the mounted images, and the previous ones that are still available!") + "\n\n" +
 					_("To mount a new image, simply drag and drop it into this window, or use the corresponding option in the right-click menu of the image."),
 					"media-eject");
 
 
-			stack.add_named (info_screen, "info-screen");
+			stack.add_named (info_screen, "info-screen");*/
 
 			scrolled = new Gtk.ScrolledWindow (null, null);
 			scrolled.hscrollbar_policy = Gtk.PolicyType.NEVER;
@@ -50,16 +50,11 @@ namespace mountie.Widgets {
 
 			this.pack_start (stack, true, true);
 
-			/*Services.EventManager.get_default ().event.connect ((type, settings, key) => {
-				if (type == Services.EventType.KEY_CHANGED) {
-					stack.set_visible_child_name ("key-list");
+			
+				stack.set_visible_child_name ("key-list");
 
-					key_list.add_item (settings, key, true, false, true);
-					key_list.show_all ();
-				} else {
-					warning (_("Unsupported event type \"%s\""), type.to_string ());
-				}
-			});*/
+				key_list.add_item ("key", true, false, true);
+				key_list.show_all ();
 		}
 	}
 }

@@ -36,7 +36,7 @@ namespace mountie {
 			app_launcher = "mountie.desktop";
 			application_id = "net.launchpad.mountie";
 			main_url = "https://github.com/marciodsousa/mountie";
-			bug_url = "https://github.com/marciodsousa/mountiee";
+			bug_url = "https://github.com/marciodsousa/mountie/issues";
 			help_url = "https://github.com/marciodsousa/mountie";
 			translate_url = "https://github.com/marciodsousa/mountie";
 			about_authors = {"Márcio de Sousa <marciodesousa16@gmail.com>"};

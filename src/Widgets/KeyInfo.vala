@@ -35,7 +35,7 @@ namespace mountie.Widgets {
 
 		private Gtk.Button reset_button;
 
-		public KeyInfo (Settings settings, string name, SettingsSchemaKey key) {
+		public KeyInfo ( string name) {
 			this.column_spacing = 12;
 			this.row_spacing = 12;
 			this.margin_top = 18;
@@ -45,7 +45,7 @@ namespace mountie.Widgets {
 			type_label.halign = Gtk.Align.END;
 			this.attach (type_label, 0, 0, 1, 1);
 
-			type_field = new Gtk.Label (Utils.type_to_string (key.get_value_type ()));
+			type_field = new Gtk.Label ("Utils.type_to_string (key.get_value_type ())");
 			type_field.use_markup = true;
 			type_field.selectable = true;
 			type_field.wrap = true;
@@ -58,7 +58,7 @@ namespace mountie.Widgets {
 			default_label.halign = Gtk.Align.END;
 			this.attach (default_label, 0, 1, 1, 1);
 
-			default_field = new Gtk.Label (Utils.variant_to_string (key.get_default_value ()));
+			default_field = new Gtk.Label ("Utils.variant_to_string (key.get_default_value ())");
 			default_field.use_markup = true;
 			default_field.selectable = true;
 			default_field.wrap = true;
@@ -71,7 +71,7 @@ namespace mountie.Widgets {
 			code_label.halign = Gtk.Align.END;
 			this.attach (code_label, 0, 2, 1, 1);
 
-			code_field = new Gtk.Label ("<tt><span foreground=\"#000000\" stretch=\"condensed\"><span foreground=\"#FF420B\" weight=\"bold\">var</span> val = <span foreground=\"#FF420B\" weight=\"bold\">new</span> Settings (<span foreground=\"#13A50B\">\"%s\"</span>).get_value (<span foreground=\"#13A50B\">\"%s\"</span>);</span></tt>".printf (settings.schema_id, name));
+			code_field = new Gtk.Label ("<tt><span foreground=\"#000000\" stretch=\"condensed\"><span foreground=\"#FF420B\" weight=\"bold\">var</span> val = <span foreground=\"#FF420B\" weight=\"bold\">new</span> Settings (<span foreground=\"#13A50B\">\"%s\"</span>).get_value (<span foreground=\"#13A50B\">\"%s\"</span>);</span></tt>".printf (name, name));
 			code_field.use_markup = true;
 			code_field.selectable = true;
 			code_field.wrap = true;
@@ -84,7 +84,7 @@ namespace mountie.Widgets {
 			command_label.halign = Gtk.Align.END;
 			this.attach (command_label, 0, 3, 1, 1);
 
-			command_field = new Gtk.Label ("<tt><span foreground=\"#000000\" stretch=\"condensed\">dconf read %s</span></tt>".printf (settings.path + name));
+			command_field = new Gtk.Label ("<tt><span foreground=\"#000000\" stretch=\"condensed\">dconf read %s</span></tt>".printf (name));
 			command_field.use_markup = true;
 			command_field.selectable = true;
 			command_field.wrap = true;
@@ -97,7 +97,7 @@ namespace mountie.Widgets {
 			description_label.halign = Gtk.Align.END;
 			this.attach (description_label, 0, 4, 1, 1);
 
-			description_field = new Gtk.Label (key.get_description ());
+			description_field = new Gtk.Label ("key.get_description ()");
 			description_field.use_markup = true;
 			description_field.selectable = true;
 			description_field.wrap = true;
@@ -108,7 +108,7 @@ namespace mountie.Widgets {
 			reset_button = new Gtk.Button.with_label (_("Reset to default"));
 			reset_button.get_style_context ().add_class ("destructive-action");
 			reset_button.halign = Gtk.Align.END;
-			reset_button.clicked.connect (() => settings.reset (name));
+			//reset_button.clicked.connect (() => settings.reset (name));
 			this.attach (reset_button, 0, 5, 2, 1);
 		}
 
