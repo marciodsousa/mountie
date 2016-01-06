@@ -28,19 +28,19 @@ namespace mountie.Widgets {
 			var keys = schema.list_keys ();
 
 			for (int i = 0; i < keys.length; i++) {
-				add_item ("schema");
+				//add_item ("schema");
 			}
 
 			this.show_all ();
 		}
 
-		public void add_item (string key, bool to_end = false, bool live = true, bool show_schema = false) {
-			var item = new Key (key, live, show_schema);
+		public void add_item (mountie.Backend.Filetypes.GenericAdapter mount, bool to_end = false, bool live = true, bool show_schema = false) {
+			var key = new Key(mount, true, true);
 
 			if (to_end)
-				this.pack_end (item, false, false);
+				this.pack_end (key, false, false);
 			else
-				this.pack_start (item, false, false);
+				this.pack_start (key, false, false);
 		}
 
 		public void clear_list () {

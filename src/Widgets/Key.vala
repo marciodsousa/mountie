@@ -33,7 +33,7 @@ namespace mountie.Widgets {
 
 		private Gtk.Image readonly_image;
 
-		public Key (string name, bool live, bool show_schema) {
+		public Key (mountie.Backend.Filetypes.GenericAdapter mount,  bool live, bool show_schema) {
 			this.column_spacing = 12;
 			this.margin_top = 18;
 
@@ -49,7 +49,7 @@ namespace mountie.Widgets {
 
 			this.attach (info_button, 0, 0, 1, 2);
 
-			label_name = new Gtk.Label (show_schema ? "%s -> <b>%s</b>".printf ("settings.schema_id", "name") : "<b>%s</b>".printf ("name"));
+			label_name = new Gtk.Label ("<b>%s</b>".printf (mount.getName()));
 			label_name.get_style_context ().add_class ("h3");
 			label_name.use_markup = true;
 			label_name.selectable = true;
@@ -61,7 +61,7 @@ namespace mountie.Widgets {
 			this.attach (label_name, 1, 0, 1, 1);
 
 			//if (key.get_summary () != null) {
-				label_description = new Gtk.Label ("key.get_summary ()");
+				label_description = new Gtk.Label (mount.getPath());
 				label_description.use_markup = true;
 				label_description.selectable = true;
 				label_description.wrap = true;
@@ -73,13 +73,15 @@ namespace mountie.Widgets {
 			//} else {
 				label_name.valign = Gtk.Align.CENTER;
 			//}
+
+
+				widg = new Fields.BoolInput ();
+
+				//settings.bind ("name", widg, "active", live ? GLib.SettingsBindFlags.DEFAULT : GLib.SettingsBindFlags.GET_NO_CHANGES);
 /*
 			var type = key.get_value_type ().dup_string ();
 
 			if (type == "b") {
-				widg = new Fields.BoolInput ();
-
-				settings.bind ("name", widg, "active", live ? GLib.SettingsBindFlags.DEFAULT : GLib.SettingsBindFlags.GET_NO_CHANGES);
 			} else if (type == "s") {
 				if (key.get_range ().get_child_value (0).get_string () == "enum") {
 					widg = new Fields.SelectInput (key.get_range ().get_child_value (1).get_variant ());
@@ -154,7 +156,7 @@ namespace mountie.Widgets {
 			revealer.transition_type = Gtk.RevealerTransitionType.SLIDE_DOWN;
 
 			//ey_info = new KeyInfo (settings, "name", key);
-			key_info = new KeyInfo ("name");
+			key_info = new KeyInfo (mount);
 
 			revealer.add (key_info);
 
@@ -165,7 +167,7 @@ namespace mountie.Widgets {
 
 			this.attach (separator, 0, 3, 3, 1);
 
-			//if (!settings.is_writable ("name")) {
+			/*if (!settings.is_writable ("name")) {
 				if (widg != null)
 					widg.sensitive = false;
 
@@ -177,7 +179,7 @@ namespace mountie.Widgets {
 				readonly_image.halign = Gtk.Align.END;
 
 				this.attach (readonly_image, 3, 0, 1, 2);
-			//}
+			}*/
 		}
 	}
 }

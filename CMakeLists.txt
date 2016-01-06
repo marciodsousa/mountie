@@ -58,6 +58,7 @@ vala_precompile(VALA_C
     src/Widgets/Fields/UInt64Input.vala
     src/Widgets/Fields/DoubleInput.vala
     src/Widgets/Fields/ArrayInput.vala
+    src/Backend/Filetypes/GenericAdapter.vala
 PACKAGES
     gtk+-3.0
     gio-2.0

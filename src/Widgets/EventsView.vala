@@ -50,11 +50,26 @@ namespace mountie.Widgets {
 
 			this.pack_start (stack, true, true);
 
-			
-				stack.set_visible_child_name ("key-list");
-
-				key_list.add_item ("key", true, false, true);
-				key_list.show_all ();
+			stack.set_visible_child_name ("key-list");
+			var mountTest = new mountie.Backend.Filetypes.GenericAdapter("PSX Games", "/home/marcio/Downloads/isos/", "psx_games.iso", "/mnt/mountieDrive1", true);
+			key_list.add_item (mountTest, true, false, true);
+			key_list.add_item (mountTest, true, false, true);
+			key_list.add_item (mountTest, true, false, true);
+			key_list.add_item (mountTest, true, false, true);
+			key_list.add_item (mountTest, true, false, true);
+			key_list.add_item (mountTest, true, false, true);
+			key_list.add_item (mountTest, true, false, true);
+			key_list.add_item (mountTest, true, false, true);
+			key_list.add_item (mountTest, true, false, true);
+			key_list.add_item (mountTest, true, false, true);
+			key_list.add_item (mountTest, true, false, true);
+			key_list.add_item (mountTest, true, false, true);
+			key_list.add_item (mountTest, true, false, true);
+			key_list.add_item (mountTest, true, false, true);
+			key_list.add_item (mountTest, true, false, true);
+			key_list.add_item (mountTest, true, false, true);
+			key_list.add_item (mountTest, true, false, true);
+			key_list.show_all ();
 		}
 	}
 }
