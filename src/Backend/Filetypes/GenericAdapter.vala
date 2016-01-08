@@ -7,13 +7,14 @@ namespace mountie.Backend.Filetypes {
 	private string fileName;
 	private string mountPath;
 	private bool mounted;
-	private Date lastMountDate;
+	private DateTime lastMountDate;
 		public GenericAdapter (string name, string path, string fileName, string mountPath, bool mounted) {
 			this.name = name;
 			this.path = path;
 			this.fileName = fileName;
 			this.mountPath = mountPath;
 			this.mounted = mounted;
+			this.lastMountDate = new DateTime.now_local();
 		}
 		
         /*public void mount(Interpreter interpreter, string file) {
@@ -38,7 +39,7 @@ namespace mountie.Backend.Filetypes {
         }
 
         public string getFileName(){
-        	return this.path;
+        	return this.fileName;
         }
 
         public string getMountPath(){
@@ -49,7 +50,7 @@ namespace mountie.Backend.Filetypes {
         	return this.mounted;
         }
 
-        public Date getLastMountDate(){
+        public DateTime getLastMountDate(){
         	return this.lastMountDate;
         }
 

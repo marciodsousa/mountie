@@ -53,22 +53,19 @@ namespace mountie.Widgets {
 			stack.set_visible_child_name ("key-list");
 			var mountTest = new mountie.Backend.Filetypes.GenericAdapter("PSX Games", "/home/marcio/Downloads/isos/", "psx_games.iso", "/mnt/mountieDrive1", true);
 			key_list.add_item (mountTest, true, false, true);
+			mountTest = new mountie.Backend.Filetypes.GenericAdapter("Need For Speed 3", "/home/marcio/Downloads/isos/", "psx_games.iso", "/mnt/mountieDrive2", false);
 			key_list.add_item (mountTest, true, false, true);
+			mountTest = new mountie.Backend.Filetypes.GenericAdapter("Dummy Disc", "/home/marcio/Downloads/isos/", "psx_games.iso", "/mnt/mountieDrive3", false);
 			key_list.add_item (mountTest, true, false, true);
+			mountTest = new mountie.Backend.Filetypes.GenericAdapter("Dummy Disc 2", "/home/marcio/Downloads/isos/", "psx_games.iso", "/mnt/mountieDrive4", true);
 			key_list.add_item (mountTest, true, false, true);
+			mountTest = new mountie.Backend.Filetypes.GenericAdapter("CD Backup", "/home/marcio/Downloads/isos/", "psx_games.iso", "/mnt/mountieDrive5", false);
 			key_list.add_item (mountTest, true, false, true);
+			mountTest = new mountie.Backend.Filetypes.GenericAdapter("Emulators", "/home/marcio/Downloads/isos/", "psx_games.iso", "/mnt/mountieDrive6", true);
 			key_list.add_item (mountTest, true, false, true);
+			mountTest = new mountie.Backend.Filetypes.GenericAdapter("Example", "/home/marcio/Downloads/isos/", "psx_games.iso", "/mnt/mountieDrive7", true);
 			key_list.add_item (mountTest, true, false, true);
-			key_list.add_item (mountTest, true, false, true);
-			key_list.add_item (mountTest, true, false, true);
-			key_list.add_item (mountTest, true, false, true);
-			key_list.add_item (mountTest, true, false, true);
-			key_list.add_item (mountTest, true, false, true);
-			key_list.add_item (mountTest, true, false, true);
-			key_list.add_item (mountTest, true, false, true);
-			key_list.add_item (mountTest, true, false, true);
-			key_list.add_item (mountTest, true, false, true);
-			key_list.add_item (mountTest, true, false, true);
+
 			key_list.show_all ();
 		}
 	}

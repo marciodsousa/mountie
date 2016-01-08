@@ -24,7 +24,7 @@ namespace mountie.Widgets {
 		private Gtk.Label label_name;
 		private Gtk.Label label_description;
 
-		private Gtk.Widget? widg = null;
+		private Gtk.Switch widg = null;
 
 		private Gtk.Revealer revealer;
 		private KeyInfo key_info;
@@ -75,9 +75,12 @@ namespace mountie.Widgets {
 			//}
 
 
-				widg = new Fields.BoolInput ();
+				widg = new Gtk.Switch ();
+				if (mount.isMounted()){
+					widg.set_active (true);
+				}
 
-				//settings.bind ("name", widg, "active", live ? GLib.SettingsBindFlags.DEFAULT : GLib.SettingsBindFlags.GET_NO_CHANGES);
+				//mount.bind ("name", widg, "active", mounted ? GLib.SettingsBindFlags.DEFAULT : GLib.SettingsBindFlags.GET_NO_CHANGES);
 /*
 			var type = key.get_value_type ().dup_string ();
 

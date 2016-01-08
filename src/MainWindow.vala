@@ -26,7 +26,9 @@ namespace mountie {
 		private Widgets.TitleBar title_bar;
 
 		private Widgets.EventsView events_view;
-
+		private const Gtk.TargetEntry[] targets = {
+	        {"text/uri-list",0,0}
+	    };
 
 		public MainWindow (mountieApp app) {
 			this.app = app;
@@ -39,7 +41,14 @@ namespace mountie {
 			setup_ui ();
 
 			this.show_all ();
-	}
+
+			//connect drag drop handlers
+	        Gtk.drag_dest_set (this,Gtk.DestDefaults.ALL, targets, Gdk.DragAction.COPY);
+    	    this.drag_data_received.connect(this.on_drag_data_received);
+
+
+            Notify.init ("mountie");
+		}	
 
 		private void setup_ui () {
 
@@ -60,5 +69,18 @@ namespace mountie {
 			this.add (box);
 
 		}
+
+		private void on_drag_data_received (Gdk.DragContext drag_context, int x, int y, Gtk.SelectionData data, uint info, uint time) 
+		{
+			//loop through list of URIs
+			foreach(string uri in data.get_uris ()){
+				string file = uri.replace("file://","").replace("file:/","");
+				file = Uri.unescape_string (file);
+
+            new Notify.Notification ("Mounting image...", file, "ubiquity").show();
+			}
+
+			Gtk.drag_finish (drag_context, true, false, time);
+		}	
 	}
 }

@@ -25,7 +25,7 @@ include (ValaPrecompile)
 add_definitions (-DGETTEXT_PACKAGE="mountie")
 
 find_package(PkgConfig)
-pkg_check_modules(DEPS REQUIRED granite gtk+-3.0 gthread-2.0 gio-2.0)
+pkg_check_modules(DEPS REQUIRED granite gtk+-3.0 gthread-2.0 gio-2.0 libnotify)
 add_definitions(${DEPS_CFLAGS})
 link_libraries(${DEPS_LIBRARIES})
 link_directories(${DEPS_LIBRARY_DIRS})
@@ -49,20 +49,12 @@ vala_precompile(VALA_C
     src/Widgets/KeyList.vala
     src/Widgets/Key.vala
     src/Widgets/KeyInfo.vala
-    src/Widgets/Fields/BoolInput.vala
-    src/Widgets/Fields/StringInput.vala
-    src/Widgets/Fields/SelectInput.vala
-    src/Widgets/Fields/IntegerInput.vala
-    src/Widgets/Fields/UIntegerInput.vala
-    src/Widgets/Fields/Int64Input.vala
-    src/Widgets/Fields/UInt64Input.vala
-    src/Widgets/Fields/DoubleInput.vala
-    src/Widgets/Fields/ArrayInput.vala
     src/Backend/Filetypes/GenericAdapter.vala
 PACKAGES
     gtk+-3.0
     gio-2.0
     granite
+    libnotify
 OPTIONS
     --thread
 )

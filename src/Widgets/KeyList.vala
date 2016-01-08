@@ -37,10 +37,10 @@ namespace mountie.Widgets {
 		public void add_item (mountie.Backend.Filetypes.GenericAdapter mount, bool to_end = false, bool live = true, bool show_schema = false) {
 			var key = new Key(mount, true, true);
 
-			if (to_end)
-				this.pack_end (key, false, false);
-			else
+			if (mount.isMounted())
 				this.pack_start (key, false, false);
+			else
+				this.pack_end (key, false, false);
 		}
 
 		public void clear_list () {
