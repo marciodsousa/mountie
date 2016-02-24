@@ -74,10 +74,10 @@ namespace mountie {
 		{
 			//loop through list of URIs
 			foreach(string uri in data.get_uris ()){
-				string file = uri.replace("file://","").replace("file:/","");
-				file = Uri.unescape_string (file);
+				string fileName = uri.replace("file://","").replace("file:/","");
+				fileName = Uri.unescape_string (fileName);
 
-            new Notify.Notification ("Mounting image...", file, "ubiquity").show();
+				mountie.Backend.FileHandler.start(File.new_for_path (fileName));
 			}
 
 			Gtk.drag_finish (drag_context, true, false, time);

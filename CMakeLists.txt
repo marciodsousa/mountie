@@ -50,6 +50,8 @@ vala_precompile(VALA_C
     src/Widgets/Key.vala
     src/Widgets/KeyInfo.vala
     src/Backend/Filetypes/GenericAdapter.vala
+    src/Backend/FileHandler.vala
+    src/Backend/ImageCollection.vala
 PACKAGES
     gtk+-3.0
     gio-2.0

@@ -1,62 +1,44 @@
-using Mountie.Utils;
+namespace mountie.Backend {
 
-namespace Mountie.Backend {
-
-    public class FileHandler : Object {
-        private string type;
-        
-        private enum Interpreter {
-            SHELL = 0,
-            PYTHON = 1
-        }
-        
-        public FileHandler() { 
-
-        }
-     
-        public void start(File file, string extract_dir = "default") {
+    public class FileHandler {
+        public static void start(File file) {
+            var type = "";
             try {
                 type = file.query_info("*", FileQueryInfoFlags.NONE).get_content_type();
+                stderr.printf ("%s\n", type);
             } catch(Error e) {
-                error("%s\n", e.message);
+                stderr.printf ("%s\n", e.message);
             }
             
             string filepath = file.get_path();       
             switch(type) {
-                case "application/x-deb":
-                    install_debian(file.get_path(), file.get_basename());
+                case "application/x-cd-image": //iso
+                    new Notify.Notification ("Mounting image...", filepath, "ubiquity").show();
+                    
                     break; 
                 case "application/x-shellscript":
-                    launch_interpreter(Interpreter.SHELL, filepath);   
+                    //launch_interpreter(Interpreter.SHELL, filepath);   
                     break;     
                 case "text/x-python":
-                    launch_interpreter(Interpreter.PYTHON, filepath);  
-                    break;
-                case "application/zip": 
-                case "application/x-compressed-tar":  
-                case "application/x-bzip-compressed-tar":
-                case "application/x-tar":                      
-                case "application/x-xz":  
-                    if(extract_dir != "default")
-                        extract_theme(filepath, extract_dir);   
-                    else 
-                        show_notification("The file you opened could be an archive and none of the options were checked.", true);
-                    break;                                   
+                    //launch_interpreter(Interpreter.PYTHON, filepath);  
+                    break;                                
                 default:
-                    try {
-                        string extension = "." + file.query_info("*", FileQueryInfoFlags.NONE).get_name().split(".")[1];
-                        if(extension == "." || extension == ". ")
-                            show_notification("Could not detect file extension.", true);
-                        else    
-                            show_notification(@"Sorry, but $extension files are not supported by Power Installer.", true);
-                    } catch(Error e) { 
-                        error("%s\n", e.message);
-                    }
+                    new Notify.Notification ("Unsupported file-type.", null, "ubiquity").show();
 
                     break;            
-            } 
+            }
+
+            if (!file.query_exists ()) {
+                stderr.printf ("File '%s' doesn't exist.\n", file.get_path ());
+            }else {
+                stderr.printf ("File '%s' exists.\n", file.get_path ());                    
+            }
+
+            //is directory
         }
 
+
+/*
         public void extract_theme(string file, string extract_dir) {
             var extract_dir_file = File.new_for_path(file);
             if(!extract_dir_file.query_exists()) {
@@ -136,6 +118,6 @@ namespace Mountie.Backend {
             handler.body_success = @"Successfully executed $str_inter file: $file";
             handler.body_error = "Something went wrong. The file could not exist.";    
             handler.execute_shell({ "x-terminal-emulator", "-e", arg }); 
-        }
+        }*/
     }
 }  
