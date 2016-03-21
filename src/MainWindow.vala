@@ -15,6 +15,7 @@
 * You should have received a copy of the GNU General Public License along
 * with Mountie If not, see http://www.gnu.org/licenses/.
 */
+using mountie.Backend.Filetypes;
 
 namespace mountie {
 	public class MainWindow : Gtk.Window {
@@ -81,6 +82,10 @@ namespace mountie {
 			}
 
 			Gtk.drag_finish (drag_context, true, false, time);
-		}	
+		}
+
+		public static void addMount (GenericAdapter mount){
+			//events_view.key_list.add_item (mount, true, false, true);
+		}
 	}
 }

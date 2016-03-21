@@ -25,7 +25,7 @@ namespace mountie.Widgets {
 		private InfoScreen info_screen;
 
 		private Gtk.ScrolledWindow scrolled;
-		private KeyList key_list;
+		public KeyList key_list;
 
 		public EventsView () {
 			stack = new Gtk.Stack ();

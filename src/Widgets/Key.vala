@@ -49,7 +49,7 @@ namespace mountie.Widgets {
 
 			this.attach (info_button, 0, 0, 1, 2);
 
-			label_name = new Gtk.Label ("<b>%s</b>".printf (mount.getName()));
+			label_name = new Gtk.Label ("<b>%s</b>".printf (mount.name));
 			label_name.get_style_context ().add_class ("h3");
 			label_name.use_markup = true;
 			label_name.selectable = true;
@@ -61,7 +61,7 @@ namespace mountie.Widgets {
 			this.attach (label_name, 1, 0, 1, 1);
 
 			//if (key.get_summary () != null) {
-				label_description = new Gtk.Label (mount.getPath());
+				label_description = new Gtk.Label (mount.path);
 				label_description.use_markup = true;
 				label_description.selectable = true;
 				label_description.wrap = true;
@@ -76,7 +76,7 @@ namespace mountie.Widgets {
 
 
 				widg = new Gtk.Switch ();
-				if (mount.isMounted()){
+				if (mount.mounted){
 					widg.set_active (true);
 				}
 

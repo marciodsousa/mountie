@@ -45,7 +45,7 @@ namespace mountie.Widgets {
 			location_label.halign = Gtk.Align.END;
 			this.attach (location_label, 0, 0, 1, 1);
 
-			location_field = new Gtk.Label (mount.getPath() + mount.getFileName());
+			location_field = new Gtk.Label (mount.path + mount.fileName);
 			location_field.use_markup = true;
 			location_field.selectable = true;
 			location_field.wrap = true;
@@ -58,7 +58,7 @@ namespace mountie.Widgets {
 			mount_location_label.halign = Gtk.Align.END;
 			this.attach (mount_location_label, 0, 1, 1, 1);
 
-			mount_location_field = new Gtk.Label (mount.getMountPath());
+			mount_location_field = new Gtk.Label (mount.mountPath);
 			mount_location_field.use_markup = true;
 			mount_location_field.selectable = true;
 			mount_location_field.wrap = true;
@@ -71,7 +71,7 @@ namespace mountie.Widgets {
 			mount_date_label.halign = Gtk.Align.END;
 			this.attach (mount_date_label, 0, 2, 1, 1);
 
-			mount_date_field = new Gtk.Label (mount.getLastMountDate().format ("%x %X"));
+			mount_date_field = new Gtk.Label (mount.lastMountDate.format ("%x %X"));
 			mount_date_field.use_markup = true;
 			mount_date_field.selectable = true;
 			mount_date_field.wrap = true;

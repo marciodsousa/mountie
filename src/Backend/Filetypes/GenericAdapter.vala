@@ -1,13 +1,14 @@
 namespace mountie.Backend.Filetypes {
 
-	public class GenericAdapter{
+	public class GenericAdapter : GLib.Object {
 
-	private string name;
-	private string path;
-	private string fileName;
-	private string mountPath;
-	private bool mounted;
-	private DateTime lastMountDate;
+		public string name { get; private set; }
+		public string path { get; set; }
+		public string fileName { get; private set; }
+		public string mountPath { get; set; }
+		public bool mounted { get; set; }
+		public DateTime lastMountDate { get; set; }
+		
 		public GenericAdapter (string name, string path, string fileName, string mountPath, bool mounted) {
 			this.name = name;
 			this.path = path;
@@ -29,30 +30,5 @@ namespace mountie.Backend.Filetypes {
         	//execute script for image umounting
         	//send notifications        	
         }*/
-
-        public string getName(){
-        	return this.name;
-        }
-
-        public string getPath(){
-        	return this.path;
-        }
-
-        public string getFileName(){
-        	return this.fileName;
-        }
-
-        public string getMountPath(){
-        	return this.mountPath;
-        }
-
-        public bool isMounted(){
-        	return this.mounted;
-        }
-
-        public DateTime getLastMountDate(){
-        	return this.lastMountDate;
-        }
-
 	}
 }

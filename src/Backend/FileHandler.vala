@@ -1,3 +1,6 @@
+using mountie.Widgets;
+using mountie.Backend.Filetypes;
+
 namespace mountie.Backend {
 
     public class FileHandler {
@@ -14,6 +17,9 @@ namespace mountie.Backend {
             switch(type) {
                 case "application/x-cd-image": //iso
                     new Notify.Notification ("Mounting image...", filepath, "ubiquity").show();
+                    GenericAdapter mountedImg = new mountie.Backend.Filetypes.GenericAdapter("Example", "/home/marcio/Downloads/isos/", "psx_games.iso", "/mnt/mountieDrive7", true);
+                    ImageCollection.getInstance().addImage(mountedImg);
+                    MainWindow.addMount(mountedImg);
                     
                     break; 
                 case "application/x-shellscript":
